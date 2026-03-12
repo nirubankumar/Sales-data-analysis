@@ -1,0 +1,29 @@
+
+menu={
+    'sandwich':40,
+    'pani poori':20,
+    'samosa':10,
+    'masala poori':25
+}
+
+total=0
+orders=[]
+
+for item,price in menu.items():
+    print(item,price)
+
+for i in range(100):
+    choice=input('Enter item name').lower()
+    if choice=='':
+        break
+
+    qty=int(input('Enter quantity'))
+
+    total += menu.get(choice,0)*qty
+    orders.append((choice,qty))
+
+print('YOUR ORDER')
+for item,qty in orders:
+    print(item,'x',qty)
+
+print('Total Bill:',total)
