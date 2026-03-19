@@ -1,0 +1,37 @@
+import pandas as pd
+
+import mysql.connector
+import time
+
+
+conn = mysql.connector.connect(
+    host="localhost",
+    user="root",
+    password="Niruban@2004",
+    database="sales_project"
+)
+
+cursor = conn.cursor()
+
+df = pd.read_excel("Adidas_Global.xlsx")
+
+index=0
+
+while index < len(df):
+    row =df.iloc[index]
+
+    country=row['country_code']
+    price=row['sale_price_local']
+
+    cursor.execute(
+        "INSERT INTO country_sales(country,price) Values (%s,%s)",
+        (country,price)
+    )
+
+    conn.commit()
+
+    print(f"Inserted:{country},{price}")
+
+    time.sleep(2)
+
+    
